@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 public class ThreadPoolConfigEntity {
 
     /**
-     * 应用名
+     * 应用名称
      */
-    private String appName;
+    private String applicationName;
 
     /**
-     * 线程池名
+     * 线程池名称
      */
     private String threadPoolName;
 
@@ -32,17 +32,17 @@ public class ThreadPoolConfigEntity {
     /**
      * 最大线程数
      */
-    private int maxPoolSize;
+    private int maximumPoolSize;
 
     /**
-     * 活跃线程数
+     * 当前活跃线程数
      */
-    private int activeThreadCount;
+    private int activeCount;
 
     /**
      * 当前池中线程数
      */
-    private int threadCount;
+    private int poolSize;
 
     /**
      * 队列类型
@@ -58,4 +58,9 @@ public class ThreadPoolConfigEntity {
      * 队列剩余任务数
      */
     private int remainingCapacity;
+
+    public ThreadPoolConfigEntity(String applicationName, String threadPoolName) {
+        this.applicationName = applicationName;
+        this.threadPoolName = threadPoolName;
+    }
 }

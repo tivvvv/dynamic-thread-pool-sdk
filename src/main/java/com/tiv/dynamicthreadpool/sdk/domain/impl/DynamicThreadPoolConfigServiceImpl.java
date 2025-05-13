@@ -5,9 +5,7 @@ import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -23,7 +21,24 @@ public class DynamicThreadPoolConfigServiceImpl implements DynamicThreadPoolConf
 
     @Override
     public List<ThreadPoolConfigEntity> queryThreadPoolConfigList() {
-        return Collections.emptyList();
+        Set<String> threadPoolExecutorNames = threadPoolExecutorMap.keySet();
+        List<ThreadPoolConfigEntity> threadPoolConfigEntityList = new ArrayList<>(threadPoolExecutorNames.size());
+        for (String threadPoolExecutorName : threadPoolExecutorNames) {
+            ThreadPoolExecutor threadPoolExecutor = threadPoolExecutorMap.get(threadPoolExecutorName);
+            ThreadPoolConfigEntity threadPoolConfigEntity = ThreadPoolConfigEntity.builder()
+                    .applicationName(applicationName)
+                    .threadPoolName(threadPoolExecutorName)
+                    .corePoolSize(threadPoolExecutor.getCorePoolSize())
+                    .maximumPoolSize(threadPoolExecutor.getMaximumPoolSize())
+                    .activeCount(threadPoolExecutor.getActiveCount())
+                    .poolSize(threadPoolExecutor.getPoolSize())
+                    .queueType(threadPoolExecutor.getQueue().getClass().getSimpleName())
+                    .queueSize(threadPoolExecutor.getQueue().size())
+                    .remainingCapacity(threadPoolExecutor.getQueue().remainingCapacity())
+                    .build();
+            threadPoolConfigEntityList.add(threadPoolConfigEntity);
+        }
+        return threadPoolConfigEntityList;
     }
 
     @Override
