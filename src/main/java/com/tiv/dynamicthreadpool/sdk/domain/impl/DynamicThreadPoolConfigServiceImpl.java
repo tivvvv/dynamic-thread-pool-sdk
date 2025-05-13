@@ -65,6 +65,16 @@ public class DynamicThreadPoolConfigServiceImpl implements DynamicThreadPoolConf
 
     @Override
     public void updateThreadPoolConfig(ThreadPoolConfigEntity threadPoolConfigEntity) {
+        if (threadPoolConfigEntity == null || !applicationName.equals(threadPoolConfigEntity.getApplicationName())) {
+            return;
+        }
 
+        ThreadPoolExecutor threadPoolExecutor = threadPoolExecutorMap.get(threadPoolConfigEntity.getThreadPoolName());
+        if (threadPoolExecutor == null) {
+            return;
+        }
+
+        threadPoolExecutor.setCorePoolSize(threadPoolConfigEntity.getCorePoolSize());
+        threadPoolExecutor.setMaximumPoolSize(threadPoolConfigEntity.getMaximumPoolSize());
     }
 }
