@@ -1,5 +1,6 @@
 package com.tiv.dynamicthreadpool.sdk.domain.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.tiv.dynamicthreadpool.sdk.domain.DynamicThreadPoolConfigService;
 import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
 import lombok.AllArgsConstructor;
@@ -43,7 +44,23 @@ public class DynamicThreadPoolConfigServiceImpl implements DynamicThreadPoolConf
 
     @Override
     public ThreadPoolConfigEntity queryThreadPoolConfigByName(String threadPoolName) {
-        return null;
+        ThreadPoolExecutor threadPoolExecutor = threadPoolExecutorMap.get(threadPoolName);
+        if (threadPoolExecutor == null) {
+            return new ThreadPoolConfigEntity(applicationName, threadPoolName);
+        }
+        ThreadPoolConfigEntity threadPoolConfigEntity = ThreadPoolConfigEntity.builder()
+                .applicationName(applicationName)
+                .threadPoolName(threadPoolName)
+                .corePoolSize(threadPoolExecutor.getCorePoolSize())
+                .maximumPoolSize(threadPoolExecutor.getMaximumPoolSize())
+                .activeCount(threadPoolExecutor.getActiveCount())
+                .poolSize(threadPoolExecutor.getPoolSize())
+                .queueType(threadPoolExecutor.getQueue().getClass().getSimpleName())
+                .queueSize(threadPoolExecutor.getQueue().size())
+                .remainingCapacity(threadPoolExecutor.getQueue().remainingCapacity())
+                .build();
+        log.info("线程池配置,应用名:{},线程池:{},配置:{}", applicationName, threadPoolName, JSON.toJSONString(threadPoolConfigEntity));
+        return threadPoolConfigEntity;
     }
 
     @Override

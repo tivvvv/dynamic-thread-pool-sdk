@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 public class ThreadPoolConfigEntity {
 
     /**
-     * 应用名称
+     * 应用名
      */
     private String applicationName;
 
     /**
-     * 线程池名称
+     * 线程池名
      */
     private String threadPoolName;
 

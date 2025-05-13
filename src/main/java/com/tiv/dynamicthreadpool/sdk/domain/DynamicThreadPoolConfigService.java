@@ -17,7 +17,7 @@ public interface DynamicThreadPoolConfigService {
     List<ThreadPoolConfigEntity> queryThreadPoolConfigList();
 
     /**
-     * 根据线程池名查询指定线程池配置
+     * 查询指定线程池配置
      *
      * @param threadPoolName
      * @return
