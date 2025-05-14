@@ -77,7 +77,21 @@ public class DynamicThreadPoolConfigServiceImpl implements DynamicThreadPoolConf
             return;
         }
 
-        threadPoolExecutor.setCorePoolSize(threadPoolConfigEntity.getCorePoolSize());
-        threadPoolExecutor.setMaximumPoolSize(threadPoolConfigEntity.getMaximumPoolSize());
+        int corePoolSize = threadPoolConfigEntity.getCorePoolSize();
+        int maximumPoolSize = threadPoolConfigEntity.getMaximumPoolSize();
+        if (corePoolSize > maximumPoolSize) {
+            log.error("Invalid thread pool config: corePoolSize [{}] cannot be greater than maximumPoolSize [{}]",
+                    corePoolSize, maximumPoolSize);
+            return;
+        }
+
+        if (corePoolSize > threadPoolExecutor.getMaximumPoolSize()) {
+            threadPoolExecutor.setMaximumPoolSize(maximumPoolSize);
+            threadPoolExecutor.setCorePoolSize(corePoolSize);
+        } else {
+            threadPoolExecutor.setCorePoolSize(corePoolSize);
+            threadPoolExecutor.setMaximumPoolSize(maximumPoolSize);
+        }
     }
+
 }
