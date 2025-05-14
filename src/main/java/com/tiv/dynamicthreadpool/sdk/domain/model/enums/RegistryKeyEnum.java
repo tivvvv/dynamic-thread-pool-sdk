@@ -16,4 +16,5 @@ public enum RegistryKeyEnum {
 
     private final String key;
     private final String desc;
+
 }

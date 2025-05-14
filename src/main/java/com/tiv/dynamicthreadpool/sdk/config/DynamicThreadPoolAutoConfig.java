@@ -89,4 +89,5 @@ public class DynamicThreadPoolAutoConfig {
         topic.addListener(ThreadPoolConfigEntity.class, threadPoolConfigAdjustListener);
         return topic;
     }
+
 }

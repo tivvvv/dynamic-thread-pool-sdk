@@ -36,4 +36,5 @@ public class ThreadPoolConfigReportJob {
 
         log.info("Thread pool config report job ends");
     }
+
 }

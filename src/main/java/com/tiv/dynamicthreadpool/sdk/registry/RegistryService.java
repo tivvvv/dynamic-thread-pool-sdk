@@ -22,4 +22,5 @@ public interface RegistryService {
      * @param threadPoolConfigEntityList
      */
     void reportThreadPoolConfigList(List<ThreadPoolConfigEntity> threadPoolConfigEntityList);
+
 }

@@ -46,4 +46,5 @@ public class RedisRegistryServiceImpl implements RegistryService {
             log.error("Failed to report thread pool config list to Redis registry", e);
         }
     }
+
 }

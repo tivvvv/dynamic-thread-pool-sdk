@@ -32,4 +32,5 @@ public class ThreadPoolConfigAdjustListener implements MessageListener<ThreadPoo
         ThreadPoolConfigEntity threadPoolConfigEntityUpdated = dynamicThreadPoolConfigService.queryThreadPoolConfigByName(threadPoolConfigEntity.getThreadPoolName());
         registryService.reportThreadPoolConfig(threadPoolConfigEntityUpdated);
     }
+
 }

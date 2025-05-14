@@ -63,4 +63,5 @@ public class ThreadPoolConfigEntity {
         this.applicationName = applicationName;
         this.threadPoolName = threadPoolName;
     }
+
 }

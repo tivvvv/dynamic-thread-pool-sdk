@@ -30,4 +30,5 @@ public interface DynamicThreadPoolConfigService {
      * @param threadPoolConfigEntity
      */
     void updateThreadPoolConfig(ThreadPoolConfigEntity threadPoolConfigEntity);
+
 }

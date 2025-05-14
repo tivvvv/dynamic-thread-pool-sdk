@@ -59,4 +59,5 @@ public class DynamicThreadPoolRedisProperties {
      * 是否保持长连接
      */
     private boolean keepAlive = true;
+
 }
