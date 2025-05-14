@@ -4,6 +4,7 @@ import com.tiv.dynamicthreadpool.sdk.domain.DynamicThreadPoolConfigService;
 import com.tiv.dynamicthreadpool.sdk.domain.impl.DynamicThreadPoolConfigServiceImpl;
 import com.tiv.dynamicthreadpool.sdk.registry.RegistryService;
 import com.tiv.dynamicthreadpool.sdk.registry.impl.RedisRegistryServiceImpl;
+import com.tiv.dynamicthreadpool.sdk.trigger.job.ThreadPoolConfigReportJob;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -13,6 +14,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Map;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -22,6 +24,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Slf4j
 @Configuration
+@EnableScheduling
 @EnableConfigurationProperties(DynamicThreadPoolRedisProperties.class)
 public class DynamicThreadPoolAutoConfig {
 
@@ -62,5 +65,10 @@ public class DynamicThreadPoolAutoConfig {
     @Bean("redisRegistryServiceImpl")
     public RegistryService redisRegistryServiceImpl(RedissonClient redissonClient) {
         return new RedisRegistryServiceImpl(redissonClient);
+    }
+
+    @Bean("threadPoolConfigReportJob")
+    public ThreadPoolConfigReportJob threadPoolConfigReportJob(DynamicThreadPoolConfigService dynamicThreadPoolService, RegistryService registryService) {
+        return new ThreadPoolConfigReportJob(dynamicThreadPoolService, registryService);
     }
 }
