@@ -33,8 +33,8 @@ public class DynamicThreadPoolAutoConfig {
         String applicationName = applicationContext.getEnvironment().getProperty("spring.application.name");
 
         if (applicationName == null) {
-            applicationName = "未命名";
-            log.warn("工程未配置spring.application.name,默认为未命名");
+            applicationName = "unnamed";
+            log.warn("Application name not configured in spring.application.name, default value: unnamed");
         }
 
         return new DynamicThreadPoolConfigServiceImpl(applicationName, threadPoolExecutorMap);
@@ -58,7 +58,7 @@ public class DynamicThreadPoolAutoConfig {
                 .setKeepAlive(properties.isKeepAlive());
 
         RedissonClient redissonClient = Redisson.create(config);
-        log.info("动态线程池连接redis注册中心成功,配置信息:{}", properties.toString());
+        log.info("Connected to redis registry successfully, config: {}", properties.toString());
         return redissonClient;
     }
 

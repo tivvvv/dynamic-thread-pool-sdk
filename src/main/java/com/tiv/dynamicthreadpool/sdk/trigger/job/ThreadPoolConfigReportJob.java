@@ -27,11 +27,11 @@ public class ThreadPoolConfigReportJob {
 
         List<ThreadPoolConfigEntity> threadPoolConfigEntityList = dynamicThreadPoolConfigService.queryThreadPoolConfigList();
         registryService.reportThreadPoolConfigList(threadPoolConfigEntityList);
-        log.info("report thread pool config list:{}", JSON.toJSONString(threadPoolConfigEntityList));
+        log.info("report thread pool config list: {}", JSON.toJSONString(threadPoolConfigEntityList));
 
         for (ThreadPoolConfigEntity threadPoolConfigEntity : threadPoolConfigEntityList) {
             registryService.reportThreadPoolConfig(threadPoolConfigEntity);
-            log.info("report thread pool config:{}", JSON.toJSONString(threadPoolConfigEntity));
+            log.info("report thread pool config: {}", JSON.toJSONString(threadPoolConfigEntity));
         }
 
         log.info("Thread pool config report job ends");

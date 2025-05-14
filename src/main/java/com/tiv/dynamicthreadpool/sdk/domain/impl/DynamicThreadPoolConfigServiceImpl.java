@@ -62,7 +62,7 @@ public class DynamicThreadPoolConfigServiceImpl implements DynamicThreadPoolConf
                 .queueSize(threadPoolExecutor.getQueue().size())
                 .remainingCapacity(threadPoolExecutor.getQueue().remainingCapacity())
                 .build();
-        log.info("线程池配置,应用名:{},线程池:{},配置:{}", applicationName, threadPoolName, JSON.toJSONString(threadPoolConfigEntity));
+        log.info("Thread pool config, application: {}, pool: {}, detail: {}", applicationName, threadPoolName, JSON.toJSONString(threadPoolConfigEntity));
         return threadPoolConfigEntity;
     }
 
