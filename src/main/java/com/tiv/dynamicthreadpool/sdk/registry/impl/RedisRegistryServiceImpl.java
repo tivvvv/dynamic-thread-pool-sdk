@@ -4,9 +4,11 @@ import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
 import com.tiv.dynamicthreadpool.sdk.domain.model.enums.RegistryKeyEnum;
 import com.tiv.dynamicthreadpool.sdk.registry.RegistryService;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBucket;
 import org.redisson.api.RList;
 import org.redisson.api.RedissonClient;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -23,7 +25,14 @@ public class RedisRegistryServiceImpl implements RegistryService {
 
     @Override
     public void reportThreadPoolConfig(ThreadPoolConfigEntity threadPoolConfigEntity) {
-
+        try {
+            String cacheKey = String.format("%s_%s_%s", RegistryKeyEnum.THREAD_POOL_CONFIG_KEY.getKey(),
+                    threadPoolConfigEntity.getApplicationName(), threadPoolConfigEntity.getThreadPoolName());
+            RBucket<ThreadPoolConfigEntity> bucket = redissonClient.getBucket(cacheKey);
+            bucket.set(threadPoolConfigEntity, Duration.ofDays(30));
+        } catch (Exception e) {
+            log.error("Failed to report thread pool config to Redis registry", e);
+        }
     }
 
     @Override
