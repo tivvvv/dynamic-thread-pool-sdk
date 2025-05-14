@@ -2,11 +2,15 @@ package com.tiv.dynamicthreadpool.sdk.config;
 
 import com.tiv.dynamicthreadpool.sdk.domain.DynamicThreadPoolConfigService;
 import com.tiv.dynamicthreadpool.sdk.domain.impl.DynamicThreadPoolConfigServiceImpl;
+import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
+import com.tiv.dynamicthreadpool.sdk.domain.model.enums.RegistryKeyEnum;
 import com.tiv.dynamicthreadpool.sdk.registry.RegistryService;
 import com.tiv.dynamicthreadpool.sdk.registry.impl.RedisRegistryServiceImpl;
 import com.tiv.dynamicthreadpool.sdk.trigger.job.ThreadPoolConfigReportJob;
+import com.tiv.dynamicthreadpool.sdk.trigger.listener.ThreadPoolConfigAdjustListener;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
+import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
@@ -28,9 +32,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableConfigurationProperties(DynamicThreadPoolRedisProperties.class)
 public class DynamicThreadPoolAutoConfig {
 
+    private String applicationName;
+
     @Bean("dynamicThreadPoolConfigService")
     public DynamicThreadPoolConfigService dynamicThreadPoolConfigService(ApplicationContext applicationContext, Map<String, ThreadPoolExecutor> threadPoolExecutorMap) {
-        String applicationName = applicationContext.getEnvironment().getProperty("spring.application.name");
+        applicationName = applicationContext.getEnvironment().getProperty("spring.application.name");
 
         if (applicationName == null) {
             applicationName = "unnamed";
@@ -70,5 +76,17 @@ public class DynamicThreadPoolAutoConfig {
     @Bean("threadPoolConfigReportJob")
     public ThreadPoolConfigReportJob threadPoolConfigReportJob(DynamicThreadPoolConfigService dynamicThreadPoolService, RegistryService registryService) {
         return new ThreadPoolConfigReportJob(dynamicThreadPoolService, registryService);
+    }
+
+    @Bean("threadPoolConfigAdjustListener")
+    public ThreadPoolConfigAdjustListener threadPoolConfigAdjustListener(DynamicThreadPoolConfigService dynamicThreadPoolService, RegistryService registryService) {
+        return new ThreadPoolConfigAdjustListener(dynamicThreadPoolService, registryService);
+    }
+
+    @Bean(name = "dynamicThreadPoolListenerTopic")
+    public RTopic dynamicThreadPoolListenerTopic(RedissonClient redissonClient, ThreadPoolConfigAdjustListener threadPoolConfigAdjustListener) {
+        RTopic topic = redissonClient.getTopic(String.format("%s_%s", RegistryKeyEnum.DYNAMIC_THREAD_POOL_LISTENER_TOPIC.getKey(), applicationName));
+        topic.addListener(ThreadPoolConfigEntity.class, threadPoolConfigAdjustListener);
+        return topic;
     }
 }
