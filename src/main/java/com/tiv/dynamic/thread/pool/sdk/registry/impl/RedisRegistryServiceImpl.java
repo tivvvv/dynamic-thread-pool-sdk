@@ -12,7 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 /**
- * Redis注册中心服务实现
+ * redis注册中心服务实现
  */
 @Slf4j
 public class RedisRegistryServiceImpl implements RegistryService {
@@ -31,7 +31,7 @@ public class RedisRegistryServiceImpl implements RegistryService {
             RBucket<ThreadPoolConfigEntity> bucket = redissonClient.getBucket(cacheKey);
             bucket.set(threadPoolConfigEntity, Duration.ofDays(30));
         } catch (Exception e) {
-            log.error("Failed to report thread pool config to Redis registry", e);
+            log.error("Failed to report thread pool config to redis registry", e);
         }
     }
 
@@ -43,7 +43,7 @@ public class RedisRegistryServiceImpl implements RegistryService {
             list.delete();
             list.addAll(threadPoolConfigEntityList);
         } catch (Exception e) {
-            log.error("Failed to report thread pool config list to Redis registry", e);
+            log.error("Failed to report thread pool config list to redis registry", e);
         }
     }
 

@@ -15,6 +15,7 @@ import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 @EnableScheduling
 @EnableConfigurationProperties(DynamicThreadPoolRedisProperties.class)
+@ConditionalOnProperty(name = "dynamic.thread.pool.config.enabled", havingValue = "true")
 public class DynamicThreadPoolAutoConfig {
 
     private String applicationName;

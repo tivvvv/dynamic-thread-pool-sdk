@@ -11,6 +11,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class DynamicThreadPoolRedisProperties {
 
     /**
+     * 是否启用sdk
+     */
+    private boolean enabled;
+
+    /**
      * redis host
      */
     private String host;
