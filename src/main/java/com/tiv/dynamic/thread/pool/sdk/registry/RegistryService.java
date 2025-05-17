@@ -1,6 +1,6 @@
-package com.tiv.dynamicthreadpool.sdk.registry;
+package com.tiv.dynamic.thread.pool.sdk.registry;
 
-import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
+import com.tiv.dynamic.thread.pool.sdk.domain.model.entity.ThreadPoolConfigEntity;
 
 import java.util.List;
 

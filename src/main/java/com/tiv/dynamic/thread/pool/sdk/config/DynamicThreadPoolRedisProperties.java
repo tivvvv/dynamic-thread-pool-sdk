@@ -1,4 +1,4 @@
-package com.tiv.dynamicthreadpool.sdk.config;
+package com.tiv.dynamic.thread.pool.sdk.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

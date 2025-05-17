@@ -1,14 +1,14 @@
-package com.tiv.dynamicthreadpool.sdk.config;
+package com.tiv.dynamic.thread.pool.sdk.config;
 
 import com.alibaba.fastjson.JSON;
-import com.tiv.dynamicthreadpool.sdk.domain.DynamicThreadPoolConfigService;
-import com.tiv.dynamicthreadpool.sdk.domain.impl.DynamicThreadPoolConfigServiceImpl;
-import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
-import com.tiv.dynamicthreadpool.sdk.domain.model.enums.RegistryKeyEnum;
-import com.tiv.dynamicthreadpool.sdk.registry.RegistryService;
-import com.tiv.dynamicthreadpool.sdk.registry.impl.RedisRegistryServiceImpl;
-import com.tiv.dynamicthreadpool.sdk.trigger.job.ThreadPoolConfigReportJob;
-import com.tiv.dynamicthreadpool.sdk.trigger.listener.ThreadPoolConfigAdjustListener;
+import com.tiv.dynamic.thread.pool.sdk.domain.DynamicThreadPoolConfigService;
+import com.tiv.dynamic.thread.pool.sdk.domain.impl.DynamicThreadPoolConfigServiceImpl;
+import com.tiv.dynamic.thread.pool.sdk.domain.model.entity.ThreadPoolConfigEntity;
+import com.tiv.dynamic.thread.pool.sdk.domain.model.enums.RegistryKeyEnum;
+import com.tiv.dynamic.thread.pool.sdk.registry.RegistryService;
+import com.tiv.dynamic.thread.pool.sdk.registry.impl.RedisRegistryServiceImpl;
+import com.tiv.dynamic.thread.pool.sdk.trigger.job.ThreadPoolConfigReportJob;
+import com.tiv.dynamic.thread.pool.sdk.trigger.listener.ThreadPoolConfigAdjustListener;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RTopic;
@@ -41,8 +41,8 @@ public class DynamicThreadPoolAutoConfig {
         applicationName = applicationContext.getEnvironment().getProperty("spring.application.name");
 
         if (applicationName == null) {
-            applicationName = "unnamed";
-            log.warn("Application name not configured in spring.application.name, default value: unnamed");
+            applicationName = "unknown";
+            log.warn("Application name not configured in spring.application.name, default value: unknown");
         }
 
         // 读取缓存中的线程池配置

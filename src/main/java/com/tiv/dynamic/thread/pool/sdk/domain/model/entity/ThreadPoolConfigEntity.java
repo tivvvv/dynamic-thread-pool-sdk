@@ -1,4 +1,4 @@
-package com.tiv.dynamicthreadpool.sdk.domain.model.entity;
+package com.tiv.dynamic.thread.pool.sdk.domain.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

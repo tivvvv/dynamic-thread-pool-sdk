@@ -1,8 +1,8 @@
-package com.tiv.dynamicthreadpool.sdk.domain.impl;
+package com.tiv.dynamic.thread.pool.sdk.domain.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.tiv.dynamicthreadpool.sdk.domain.DynamicThreadPoolConfigService;
-import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
+import com.tiv.dynamic.thread.pool.sdk.domain.DynamicThreadPoolConfigService;
+import com.tiv.dynamic.thread.pool.sdk.domain.model.entity.ThreadPoolConfigEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

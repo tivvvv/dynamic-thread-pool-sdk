@@ -1,8 +1,8 @@
-package com.tiv.dynamicthreadpool.sdk.trigger.listener;
+package com.tiv.dynamic.thread.pool.sdk.trigger.listener;
 
-import com.tiv.dynamicthreadpool.sdk.domain.DynamicThreadPoolConfigService;
-import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
-import com.tiv.dynamicthreadpool.sdk.registry.RegistryService;
+import com.tiv.dynamic.thread.pool.sdk.domain.DynamicThreadPoolConfigService;
+import com.tiv.dynamic.thread.pool.sdk.domain.model.entity.ThreadPoolConfigEntity;
+import com.tiv.dynamic.thread.pool.sdk.registry.RegistryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.listener.MessageListener;

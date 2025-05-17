@@ -1,8 +1,8 @@
-package com.tiv.dynamicthreadpool.sdk.registry.impl;
+package com.tiv.dynamic.thread.pool.sdk.registry.impl;
 
-import com.tiv.dynamicthreadpool.sdk.domain.model.entity.ThreadPoolConfigEntity;
-import com.tiv.dynamicthreadpool.sdk.domain.model.enums.RegistryKeyEnum;
-import com.tiv.dynamicthreadpool.sdk.registry.RegistryService;
+import com.tiv.dynamic.thread.pool.sdk.domain.model.entity.ThreadPoolConfigEntity;
+import com.tiv.dynamic.thread.pool.sdk.domain.model.enums.RegistryKeyEnum;
+import com.tiv.dynamic.thread.pool.sdk.registry.RegistryService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RList;

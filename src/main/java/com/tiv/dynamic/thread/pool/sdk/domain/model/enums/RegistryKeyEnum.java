@@ -1,4 +1,4 @@
-package com.tiv.dynamicthreadpool.sdk.domain.model.enums;
+package com.tiv.dynamic.thread.pool.sdk.domain.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
